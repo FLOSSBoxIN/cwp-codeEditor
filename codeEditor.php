@@ -1,4 +1,11 @@
 <?php
+/*
+Kinsmen Code Editor
+Version: 1.2
+Author: @JosephChuks
+GitHub: https://github.com/JosephChuks/cwp-codeEditor
+*/
+
 if (!isset($_GET["filename"]) || !is_file($_GET["filename"])) {
     die("Invalid file specified.");
 }
@@ -26,14 +33,14 @@ $languageModes = [
 ];
 $editorMode = isset($languageModes[$fileExtension])
     ? $languageModes[$fileExtension]
-    : "html";
+    : "sh";
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Code Editor - <?php echo basename($filename); ?></title>
+    <title><?php echo basename($filename); ?></title>
 
     <!-- Include Ace Editor -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
@@ -48,6 +55,7 @@ $editorMode = isset($languageModes[$fileExtension])
     <script src="https://unpkg.com/@prettier/plugin-php@0.19.0/standalone.js"></script> <!-- PHP plugin -->
     <script src="https://unpkg.com/@prettier/plugin-php@0.19.0/parser-php.js"></script>
     <script src="https://unpkg.com/prettier@2.7.1/parser-markdown.js"></script>
+    <link rel="icon" href="icon.png" type="image/png">
     <style>
         body, html {
             margin: 0;
@@ -150,6 +158,7 @@ $editorMode = isset($languageModes[$fileExtension])
     <div>
         <label for="theme">Theme:</label>
         <select id="theme" onchange="changeTheme(this.value)">
+            <option value="cobalt">Cobalt</option>
             <option value="monokai">Monokai</option>
             <option value="github">GitHub</option>
             <option value="tomorrow">Tomorrow</option>
@@ -191,7 +200,7 @@ $editorMode = isset($languageModes[$fileExtension])
         </select>
         
        
-        <span><strong>FILE PATH: </strong><?= $filename ?></span>
+        <span style="font-size:12px"><strong>FILE PATH: </strong><span style="color:#4493f8"><?= $filename ?></span></span>
     </div>
  
 
@@ -219,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Initialize Ace Editor
     var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/monokai");
+    editor.setTheme("ace/theme/cobalt");
     editor.session.setMode("ace/mode/<?php echo $editorMode; ?>");
     editor.setOptions({
         enableBasicAutocompletion: true,

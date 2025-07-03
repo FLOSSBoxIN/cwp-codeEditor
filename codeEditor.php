@@ -1,6 +1,6 @@
 <?php
 /*
-Kinsmen Code Editor
+CWP Code Editor
 Version: 1.2
 Author: @JosephChuks
 GitHub: https://github.com/JosephChuks/cwp-codeEditor
